@@ -22,13 +22,13 @@
 - Verified live (real keys, not demo): 3 Firecrawl searches → 16 signals → 12 bugs (5 P0/P1) → 4 RICE items → 3 user stories. `npm run build`, `npm test`, `npx eslint .` all pass.
 
 ## Remaining
-- Deploy to Vercel (blocked — see below).
+- Confirm/prod-deploy on Vercel: repo is pushed to `origin/main` (https://github.com/yravnit/snag.git); Vercel CLI token is still invalid so deploy could not be triggered locally. Connect the repo in the Vercel dashboard (push then auto-deploys) or supply a valid token.
 
 ## Blockers / Env Notes
 - Keys are set in `.env.local` (gitignored): `FIRECRAWL_API_KEY`, `GEMINI_API_KEY`.
 - `gemini-2.5-flash` is retired for this key (404); it was NOT added as a fallback. `gemma-4-31b-it` intermittently returns 503 "high demand"; `gemini-3.5-flash-lite` is the working fallback. Both accept `responseJsonSchema`. Brief upstream 503 bursts can fail an audit; direct retries succeed.
 - Do NOT add `export const dynamic = "force-dynamic"`: Next 16 with `cacheComponents: true` removed that option — adding it breaks the build. `maxDuration` is still supported.
-- Vercel deploy is blocked: `vercel whoami` reports "token is not valid", no git remote is configured, and no `VERCEL_TOKEN` env var exists. Need `vercel login` + `vercel link` (or a valid token) first.
+- Vercel deploy: `vercel whoami` reports "token is not valid" and no `VERCEL_TOKEN` env var exists. Git remote now configured and `origin/main` pushed (commit 54e8599). No Vercel check-run on the pushed commit. Need `vercel login` + `vercel link`, a valid token, or repo connected in the Vercel dashboard.
 - A dev server is already running on port 3001; a rebuild wipes CSS hashes it references — restart it after builds.
 - `vitest@3` pinned: vitest 5 needs `@types/node` >=22, project uses 20. Test tooling added 3 npm audit findings (1 moderate, 2 critical) from transitive deps; not addressed.
 - `npm run build` while `npm start` is live wipes the CSS hashes the running server references (404s → unstyled page). Restart the production server after every build.
