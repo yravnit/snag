@@ -1,0 +1,240 @@
+{
+  "company": "Recruit CRM",
+  "totalSignals": 24,
+  "bugs": [
+    {
+      "id": "B-01",
+      "summary": "Candidate list freezes for 10+ seconds once an account passes ~1,000 records",
+      "category": "Software Bug",
+      "severity": "P1",
+      "workflow": "Candidate database / search",
+      "rootCause": "Unpaginated client-side fetch renders every candidate row on first paint",
+      "sourceUrl": "https://www.g2.com/products/recruit-crm/reviews"
+    },
+    {
+      "id": "B-02",
+      "summary": "Gmail two-way sync duplicates email threads and leaves replies marked unread",
+      "category": "Integration/Sync",
+      "severity": "P1",
+      "workflow": "Email messaging",
+      "rootCause": "Thread ID is re-created on each poll instead of matching the provider message ID",
+      "sourceUrl": "https://www.capterra.com/p/173056/Recruit-CRM/reviews/"
+    },
+    {
+      "id": "B-03",
+      "summary": "Mobile app crashes when uploading a resume photo from the camera roll",
+      "category": "Software Bug",
+      "severity": "P1",
+      "workflow": "Mobile candidate capture",
+      "rootCause": "Large HEIC images are passed to the parser without downscaling, exhausting the upload worker",
+      "sourceUrl": "https://www.reddit.com/r/recruiting/comments/18t4m2q/recruit_crm_mobile_crash/"
+    },
+    {
+      "id": "B-04",
+      "summary": "Interview scheduling does not push holds or cancellations to Outlook calendars",
+      "category": "Integration/Sync",
+      "severity": "P1",
+      "workflow": "Interview scheduling",
+      "rootCause": "Webhook listener only handles created events; updated and deleted events are dropped",
+      "sourceUrl": "https://www.g2.com/products/recruit-crm/reviews"
+    },
+    {
+      "id": "B-05",
+      "summary": "Job posts to Indeed fail silently and still show as 'Live' in the UI",
+      "category": "Integration/Sync",
+      "severity": "P0",
+      "workflow": "Job distribution",
+      "rootCause": "Distributor errors are swallowed and the local job status is committed before the API response",
+      "sourceUrl": "https://www.capterra.com/p/173056/Recruit-CRM/reviews/"
+    },
+    {
+      "id": "B-06",
+      "summary": "Resume parser drops contact details from PDFs that use multi-column tables",
+      "category": "Software Bug",
+      "severity": "P2",
+      "workflow": "Resume parsing",
+      "rootCause": "Text extraction reads columns in visual order and loses the header cell mapping",
+      "sourceUrl": "https://www.g2.com/products/recruit-crm/reviews"
+    },
+    {
+      "id": "B-07",
+      "summary": "Pipeline card order resets to alphabetical after a page refresh",
+      "category": "Software Bug",
+      "severity": "P2",
+      "workflow": "Pipeline board",
+      "rootCause": "Drag order is held in component state only and never persisted to the board API",
+      "sourceUrl": "https://www.reddit.com/r/recruiting/comments/1a9k71d/pipeline_order_keeps_resetting/"
+    },
+    {
+      "id": "B-08",
+      "summary": "CSV report export truncates long custom-field values after 255 characters",
+      "category": "Software Bug",
+      "severity": "P2",
+      "workflow": "Reporting",
+      "rootCause": "Export serializer reuses the spreadsheet cell limit for the CSV writer",
+      "sourceUrl": "https://www.capterra.com/p/173056/Recruit-CRM/reviews/"
+    },
+    {
+      "id": "B-09",
+      "summary": "Autocomplete suggests candidates from other clients in shared workspaces",
+      "category": "Software Bug",
+      "severity": "P2",
+      "workflow": "Global search",
+      "rootCause": "Search index query is missing the tenant ID filter on the suggestion endpoint",
+      "sourceUrl": "https://www.reddit.com/r/recruiting/comments/19d3p0c/cross_client_suggestions/"
+    },
+    {
+      "id": "B-10",
+      "summary": "LinkedIn import silently skips profiles without a photo",
+      "category": "Software Bug",
+      "severity": "P2",
+      "workflow": "Sourcing / LinkedIn import",
+      "rootCause": "Importer treats a missing avatar URL as a failed record and aborts the row",
+      "sourceUrl": "https://www.g2.com/products/recruit-crm/reviews"
+    },
+    {
+      "id": "B-11",
+      "summary": "Indeed and ZipRecruiter statuses drift out of sync after a bulk job edit",
+      "category": "Integration/Sync",
+      "severity": "P2",
+      "workflow": "Job distribution",
+      "rootCause": "Bulk edit writes local state without queuing incremental distributor updates",
+      "sourceUrl": "https://www.capterra.com/p/173056/Recruit-CRM/reviews/"
+    },
+    {
+      "id": "B-12",
+      "summary": "Duplicate candidate profiles are created when the same email is imported twice",
+      "category": "Integration/Sync",
+      "severity": "P2",
+      "workflow": "Candidate intake",
+      "rootCause": "Dedupe check is case-sensitive and ignores plus-addressing aliases",
+      "sourceUrl": "https://www.reddit.com/r/recruiting/comments/1b2n8xs/duplicate_profiles/"
+    },
+    {
+      "id": "B-13",
+      "summary": "Moving several candidates to another stage requires one request per candidate",
+      "category": "UX Friction",
+      "severity": "P2",
+      "workflow": "Pipeline board",
+      "rootCause": "No bulk selection or batch stage-change endpoint in the board UI",
+      "sourceUrl": "https://www.g2.com/products/recruit-crm/reviews"
+    },
+    {
+      "id": "B-14",
+      "summary": "Adding a note takes five clicks from a candidate profile",
+      "category": "UX Friction",
+      "severity": "P3",
+      "workflow": "Candidate profile",
+      "rootCause": "Note composer is buried in an overflow tab with no inline quick-add",
+      "sourceUrl": "https://www.capterra.com/p/173056/Recruit-CRM/reviews/"
+    },
+    {
+      "id": "B-15",
+      "summary": "No boolean search operators for candidate skills and previous employers",
+      "category": "Missing Feature",
+      "severity": "P2",
+      "workflow": "Candidate search",
+      "rootCause": "Search backend only exposes a single plain-text query parameter",
+      "sourceUrl": "https://www.g2.com/products/recruit-crm/reviews"
+    },
+    {
+      "id": "B-16",
+      "summary": "No native Slack alerts when a candidate reaches a new pipeline stage",
+      "category": "Missing Feature",
+      "severity": "P3",
+      "workflow": "Notifications",
+      "rootCause": "Notification channels are limited to in-app and email delivery",
+      "sourceUrl": "https://www.reddit.com/r/recruiting/comments/1c7m2qa/slack_alerts/"
+    }
+  ],
+  "pmPlan": {
+    "rice": [
+      {
+        "id": "R-1",
+        "initiative": "Bulk stage changes with multi-select on the pipeline board",
+        "reach": 700,
+        "impact": 2,
+        "confidence": 0.8,
+        "effort": 0.5,
+        "score": 2240
+      },
+      {
+        "id": "R-2",
+        "initiative": "Paginate and virtualize the candidate list",
+        "reach": 1200,
+        "impact": 2,
+        "confidence": 1,
+        "effort": 1.5,
+        "score": 1600
+      },
+      {
+        "id": "R-3",
+        "initiative": "Fix Gmail two-way sync with stable provider message IDs",
+        "reach": 900,
+        "impact": 3,
+        "confidence": 0.8,
+        "effort": 2,
+        "score": 1080
+      },
+      {
+        "id": "R-4",
+        "initiative": "Add boolean operators to candidate search",
+        "reach": 600,
+        "impact": 1,
+        "confidence": 0.8,
+        "effort": 1,
+        "score": 480
+      },
+      {
+        "id": "R-5",
+        "initiative": "Two-way Outlook interview calendar sync",
+        "reach": 500,
+        "impact": 2,
+        "confidence": 0.8,
+        "effort": 2,
+        "score": 400
+      }
+    ],
+    "userStories": [
+      {
+        "id": "US-1",
+        "title": "Bulk move candidates between pipeline stages",
+        "given": "a recruiter has selected several candidates on the pipeline board",
+        "when": "they choose a destination stage from the bulk action menu and confirm",
+        "then": "all selected candidates appear in the new stage and a single undo action is offered",
+        "acceptanceCriteria": [
+          "Selecting candidates shows a bulk action bar with a stage picker",
+          "One batch request updates every selected candidate; no per-candidate requests",
+          "A failure rolls back all stage changes and shows a single error message",
+          "Stage order persists after a page refresh"
+        ]
+      },
+      {
+        "id": "US-2",
+        "title": "Fast candidate list on large databases",
+        "given": "an account contains more than 1,000 candidate records",
+        "when": "the recruiter opens the candidate database or types in the search box",
+        "then": "the first page renders in under one second with no visible freeze",
+        "acceptanceCriteria": [
+          "Initial list fetch returns at most 50 rows per page",
+          "Rows are virtualized so only visible cards are mounted",
+          "Search requests are debounced and cancelled when superseded",
+          "Scrolling to the end loads the next page without layout shift"
+        ]
+      },
+      {
+        "id": "US-3",
+        "title": "Reliable Gmail thread sync",
+        "given": "a recruiter replies to a candidate email from Gmail",
+        "when": "the sync job runs",
+        "then": "the reply appears once on the candidate timeline and is marked read in both systems",
+        "acceptanceCriteria": [
+          "Threads are matched by provider message ID, not by subject line",
+          "Re-running the sync job does not create duplicate timeline entries",
+          "Replies received after the last poll are picked up on the next run",
+          "A provider error is logged and retried without corrupting the thread"
+        ]
+      }
+    ]
+  }
+}
